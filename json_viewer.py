@@ -168,6 +168,17 @@ class JsonViewer(QtWidgets.QMainWindow):
 
 def main():
     qt_app = QtWidgets.QApplication(sys.argv)
+
+    # If no file specified, tell user gracefully
+    if (len(sys.argv) <= 1):
+        dialog = QtWidgets.QMessageBox()
+        dialog.setIcon(QtWidgets.QMessageBox.Critical)
+        dialog.setWindowTitle('JSON Viewer')
+        dialog.setText('ERROR: No file specified')
+        dialog.setStandardButtons(QtWidgets.QMessageBox.Close)
+        dialog.setDefaultButton(QtWidgets.QMessageBox.Close)
+        sys.exit(dialog.buttonRole(dialog.button(dialog.exec_())))
+
     json_viewer = JsonViewer()
     sys.exit(qt_app.exec_())
 
